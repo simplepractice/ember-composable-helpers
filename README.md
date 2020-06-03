@@ -661,6 +661,45 @@ parameter, `useDeepEqual`, to flag whether a deep equal comparison should be per
 
 ### Object helpers
 
+#### `entries`
+Returns an array of a given object's own enumerable string-keyed property `[key, value]` pairs
+
+```hbs
+  {{#each (entries object) as |entry|}}
+    {{get entry 0}}:{{get entry 1}}
+  {{/each}}
+```
+
+You can pair it with other array helpers too. For example
+
+```hbs
+  {{#each (sort-by myOwnSortByFunction (entries myObject)) as |entry|}}
+    {{get entry 0}}
+  {{/each}}`);
+```
+
+**[⬆️ back to top](#table-of-contents)**
+
+#### `from-entries`
+Converts a two-dimensional array of `[key, value]` pairs into an Object
+
+```hbs
+  {{#each-in (from-entries entries) as |key value|}}
+    {{key}}:{{value}}
+  {{/each}}
+```
+
+You can pair it with other array helpers too. For example, to copy only
+properties with non-falsey values:
+
+```hbs
+  {{#each-in (from-entries (filter-by "1" (entries myObject))) as |k v|}}
+    {{k}}: {{v}}
+  {{/each-in}}`);
+```
+
+**[⬆️ back to top](#table-of-contents)**
+
 #### `group-by`
 Returns an object where the keys are the unique values of the given property, and the values are an array with all items of the array that have the same value of that property.
 
